@@ -140,13 +140,10 @@ MediaPlugin.prototype.createOffer = function(options) {
  * @returns {Promise}
  * @fulfilled {@link _createSDP}
  */
-MediaPlugin.prototype.createAnswer = function(jsep, options) {
+MediaPlugin.prototype.createAnswer = async function (jsep, options) {
   var self = this;
-  return Promise.try(function() {
-    return self.setRemoteSDP(jsep);
-  }).then(function() {
-    return self._createSDP('createAnswer', options);
-  });
+  await self.setRemoteSDP(jsep);
+  return await self._createSDP("createAnswer", options);
 };
 
 /**
